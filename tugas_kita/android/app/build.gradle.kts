@@ -11,12 +11,16 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        // Menggunakan Java 8 / 1.8 untuk desugaring
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+        
+        // Perbaikan sintaks: tambahkan '='
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     defaultConfig {
@@ -28,6 +32,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        
+        // Perbaikan sintaks: tambahkan '='
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -41,4 +48,9 @@ android {
 
 flutter {
     source = "../.."
+}
+
+// Perbaikan: Menambahkan dependency desugaring yang dibutuhkan
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }
